@@ -4,7 +4,6 @@ public class CapturaElDragon {
         final int NUMERO_DE_TURNOS = 10;
         final int NUMERO_CUEVAS = 100;
 
-
         boolean capturado = false;
         int posicionDragon = generarPosicionInicial(NUMERO_CUEVAS);
         int turno = 0;
@@ -12,16 +11,16 @@ public class CapturaElDragon {
         System.out.println("¡Bienvenido al juego 'Captura al Dragón'!");
         System.out.println("El dragón está escondido en una de las " + NUMERO_CUEVAS + " cuevas. ¡Buena suerte!");
 
-
         while (turno < NUMERO_DE_TURNOS && !capturado) {
             turno++;
             System.out.println("\nTurno " + turno + " de " + NUMERO_DE_TURNOS);
             int cuevaJugador = pedirCueva(NUMERO_CUEVAS);
 
-
             if (cuevaJugador == posicionDragon) {
                 capturado = true;
                 System.out.println("¡Felicidades! Capturaste al dragón en el turno " + turno);
+            } else {
+                darPista(posicionDragon, cuevaJugador);
             }
         }
     }
@@ -38,5 +37,16 @@ public class CapturaElDragon {
             cueva = entrada.nextInt();
         } while (cueva < 1 || cueva > maxCuevas);
         return cueva;
+    }
+
+    static void darPista(int posicionDragon, int cuevaJugador) {
+        int distancia = Math.abs(posicionDragon - cuevaJugador);
+        if (distancia == 1) {
+            System.out.println("¡Estás muy cerca!");
+        } else if (distancia <= 5) {
+            System.out.println("Estás cerca, sigue buscando.");
+        } else {
+            System.out.println("El dragón está lejos...");
+        }
     }
 }
