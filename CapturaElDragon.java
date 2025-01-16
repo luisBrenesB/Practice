@@ -1,6 +1,7 @@
+import java.util.Scanner;
+
 public class CapturaElDragon {
     public static void main(String[] args) {
-
         final int NUMERO_DE_TURNOS = 10;
         final int NUMERO_CUEVAS = 100;
 
@@ -18,10 +19,16 @@ public class CapturaElDragon {
 
             if (cuevaJugador == posicionDragon) {
                 capturado = true;
-                System.out.println("¡Felicidades! Capturaste al dragón en el turno " + turno);
+                System.out.println("¡Felicidades! Capturaste al dragón en el turno " + turno + " 🐉.");
             } else {
                 darPista(posicionDragon, cuevaJugador);
+                posicionDragon = moverDragon(posicionDragon, NUMERO_CUEVAS);
+                System.out.println("El dragón se ha movido a otra cueva...");
             }
+        }
+
+        if (!capturado) {
+            System.out.println("\n¡Lo siento! No capturaste al dragón. Escapó hacia la cueva " + posicionDragon + ".");
         }
     }
 
@@ -48,5 +55,17 @@ public class CapturaElDragon {
         } else {
             System.out.println("El dragón está lejos...");
         }
+    }
+
+    static int moverDragon(int posicionActual, int maxCuevas) {
+        int movimiento = (int) (Math.random() * 3) - 1;
+        int nuevaPosicion = posicionActual + movimiento;
+
+        if (nuevaPosicion < 1) {
+            nuevaPosicion = 1;
+        } else if (nuevaPosicion > maxCuevas) {
+            nuevaPosicion = maxCuevas;
+        }
+        return nuevaPosicion;
     }
 }
